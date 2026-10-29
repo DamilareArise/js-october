@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #textScreen2 {
+            opacity: .5;
+        }
+    </style>
+
+    <div>
+        <div>
+            <span id="textScreen2"></span>
+            <p id="textScreen">0</p>
+        </div>
+        <div>
+            <button onclick="displayChar(1)">1</button>
+            <button onclick="displayChar(2)">2</button>
+            <button onclick="displayChar(3)">3</button>
+            <button onclick="displayChar('+')">+</button>
+            <button onclick="displayChar('-')">-</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="deleteChar()">DEL</button>
+            <button onclick="clearAll()">AC</button>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        // let some = "ADEMOLA"
+
+        // console.log(some.slice(0, -1));
+
+
+
+        // function display1(){
+        //     if (textScreen.innerHTML == 0){
+        //         textScreen.innerHTML = 1
+        //     }else{
+        //         textScreen.innerHTML += 1
+        //     }
+        // }
+
+        function displayChar(char) {
+            if (textScreen.innerHTML == 0) {
+                textScreen.innerHTML = char
+            } else {
+                textScreen.innerHTML += char
+            }
+
+        }
+
+        function calculate() {
+            let res = eval(textScreen.innerHTML)
+            textScreen2.innerHTML = textScreen.innerHTML
+            textScreen.innerHTML = res
+            // console.log(textScreen.innerHTML);
+        }
+
+        function clearAll() {
+            textScreen.innerHTML = 0
+            textScreen2.innerHTML = ''
+        }
+
+        function deleteChar(){
+            if (textScreen.innerHTML.length == 1) {
+                clearAll()
+
+            }else{
+                textScreen.innerHTML = textScreen.innerHTML.slice(0, -1)
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

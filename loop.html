@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div id="myScreen"></div>
+
+    <script>
+
+        // loop
+        // for loop & while loop
+        let students = ["Muhid", "WIC", "Muhammed", "Muhsinah"]
+
+        for (let i = 0; i < students.length; i++) {
+            console.log(`${students[i]}, take 1k to buy wanke`);
+            
+
+        }
+
+
+        
+        for(let bottles = 99; bottles > 0; bottles--){
+            // console.log(bottles);
+
+            if(bottles == 1){
+                myScreen.innerHTML += `<p>${bottles} bottle of coke on the wall. ${bottles} bottle of coke. Take it down and pass it around. No more bottles of beer on the wall</p>`
+                break;
+            }
+            
+
+            if(bottles == 98){
+                continue;
+            }
+
+            myScreen.innerHTML += `<p>${bottles} bottles of coke on the wall. ${bottles} bottles of coke. Take one down and pass it around ${bottles-1} bottle of coke on the wall</p>`
+           
+        }
+
+        // 70 - 100 = A
+        // 60 - 69 = B
+        // 50 - 59 = C
+        // 45 - 49 = D
+        // 40 - 44 = E
+        // 0 - 39 = F
+
+    </script>
+
+</body>
+</html>

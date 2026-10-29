@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+</head>
+
+<body data-bs-theme="light">
+    <div>
+        <h2>Login</h2>
+        <p id="alertScreen"><b>Result....</b></p>
+        <input type="email" placeholder="Email" id="email_inp">
+        <input type="password" placeholder="Password" id="password_inp">
+        <button onclick="login()">Login</button>
+        <button onclick="doSomething()">Do something</button>
+    </div>
+
+    <hr>
+
+
+    <input type="number" placeholder="Value 1" id="value1_inp">
+    <select name="" id="operatorSyntax">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="/">&#247;</option>
+        <option value="*">x</option>
+    </select>
+    <input type="number" placeholder="Value 2" id="value2_inp">
+
+
+
+    <button onclick="getResult()">result</button>
+    <p> Result: <span id="resultScreen">0</span> </p>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

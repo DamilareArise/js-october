@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" id="bodyTheme" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+
+</head>
+
+<body onload="showStudents()">
+    <section class="container  p-6 md:col-4 border my-6 rounded">
+        <div class="form-field d-flex justify-content-end">
+            <div class="switch theme-inverse border " style="outline: 0;">
+                <input type="checkbox" value="" id="switchinverse" role="switch" switch onchange="switchTheme()">
+            </div>
+        </div>
+
+        <h3>Student List</h3>
+
+
+        <input type="text" placeholder="Student Name" id="studentName" class="form-control">
+        <small id="alertScreen"></small>
+        <button onclick="addStudent()" class="btn-solid btn-styled theme-primary w-100 my-3">Add</button>
+
+
+        <ol id="displayScreen" class="">
+
+        </ol>
+
+
+
+    </section>
+
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // array
+        let x = "Hello" // ["H", "e", "l", "l", "o"]
+
+
+        // CRUD - Create, Read, Update, Delete
+
+        let students = ['temi', 'wic', 'qudus', 'muhsinah']
+
+
+        // students.push("Juwon")
+        // console.log(students);
+
+        function addStudent() {
+
+            let student_name = studentName.value
+
+            if (!student_name) {
+                alertScreen.innerHTML = "Field required"
+                alertScreen.style.color = "red"
+
+            }
+            else {
+
+                students.push(student_name)
+                showStudents()
+                alertScreen.innerHTML = ""
+
+            }
+        }
+
+        function deleteStudent(i){
+            students.splice(i, 1)
+            showStudents()
+        }
+
+
+        function showStudents() {
+
+
+            console.log(bodyTheme.hasAttribute("data-bs-theme"))
+
+            displayScreen.innerHTML = ''
+            for (let i = 0; i < students.length; i++) {
+                displayScreen.innerHTML += `<li class="d-flex justify-content-between"> ${students[i]} 
+                    
+                        <span class="ms-auto" type="button" data-bs-toggle="menu" aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </span>
+                        <div class="menu">
+                            <a class="menu-item" href="#" onclick="deleteStudent(${i})">Delete ${students[i]}</a>
+                            <a class="menu-item" href="#">Edit ${students[i]}</a>
+                        </div>
+                    </li>`
+            }
+        }
+
+
+        // students.unshift("Taiwo")
+        // console.log(students.shift())
+        // students.pop()
+        // students.reverse()
+        // let sub = students.slice(0, -1)
+        students.splice(1, 1, "WIC")
+        // console.log(sub);    
+
+        console.log(students);
+
+        function get5() {
+            return 5;
+        }
+
+        // console.log(get5())
+
+
+        let theme = document.getElementById("bodyTheme")
+        // console.log(theme);
+        // theme.setAttribute("data-bs-theme", 'dark')
+
+        function switchTheme() {
+            if (switchinverse.checked) {
+                theme.setAttribute("data-bs-theme", 'light')
+
+            } else {
+                theme.setAttribute("data-bs-theme", 'dark')
+
+            }
+        }
+
+
+        // bodyTheme.getAttribute("data-bs-theme") = "dark"
+
+
+    </script>
+
+</body>
+
+</html>
