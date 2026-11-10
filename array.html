@@ -22,7 +22,8 @@
         <h3>Student List</h3>
 
 
-        <input type="text" placeholder="Student Name" id="studentName" class="form-control">
+        <input type="text" placeholder="Student Name" id="studentName" class="form-control mb-2">
+        <input type="text" placeholder="Course" id="studentCourse" class="form-control mb-2">
         <small id="alertScreen"></small>
         <button onclick="addStudent()" class="btn-solid btn-styled theme-primary w-100 my-3">Add</button>
 
@@ -30,8 +31,6 @@
         <ol id="displayScreen" class="">
 
         </ol>
-
-
 
     </section>
 
@@ -47,7 +46,7 @@
 
         // CRUD - Create, Read, Update, Delete
 
-        let students = ['temi', 'wic', 'qudus', 'muhsinah']
+        let students = []
 
 
         // students.push("Juwon")
@@ -56,6 +55,7 @@
         function addStudent() {
 
             let student_name = studentName.value
+            let student_course = studentCourse.value
 
             if (!student_name) {
                 alertScreen.innerHTML = "Field required"
@@ -64,36 +64,63 @@
             }
             else {
 
-                students.push(student_name)
+                let info = {
+                    student_name,
+                    student_course
+                }
+
+                students.push(info)
                 showStudents()
                 alertScreen.innerHTML = ""
 
             }
         }
 
-        function deleteStudent(i){
+        function deleteStudent(i) {
             students.splice(i, 1)
             showStudents()
         }
 
+        function editStudent(i) {
+            let newname = document.getElementById(`edit_student_${i}`).value
+
+            students.splice(i, 1, newname)
+            showStudents()
+        }
 
         function showStudents() {
-
-
-            console.log(bodyTheme.hasAttribute("data-bs-theme"))
-
+            console.log(students);
+            
             displayScreen.innerHTML = ''
             for (let i = 0; i < students.length; i++) {
-                displayScreen.innerHTML += `<li class="d-flex justify-content-between"> ${students[i]} 
+                displayScreen.innerHTML += `
+                    <li class="d-flex justify-content-between"> ${students[i].student_name}-${students[i].student_course} 
                     
                         <span class="ms-auto" type="button" data-bs-toggle="menu" aria-expanded="false">
                             <i class="bi bi-three-dots"></i>
                         </span>
                         <div class="menu">
-                            <a class="menu-item" href="#" onclick="deleteStudent(${i})">Delete ${students[i]}</a>
-                            <a class="menu-item" href="#">Edit ${students[i]}</a>
+                            <a class="menu-item" href="#"  data-bs-toggle="dialog" data-bs-target="#delete_${i}">Delete ${students[i]}</a>
+                            <a class="menu-item" href="#" data-bs-toggle="dialog" data-bs-target="#edit_${i}">Edit ${students[i]}</a>
                         </div>
-                    </li>`
+                    </li>
+                    
+                    <dialog class="dialog" id="delete_${i}">
+                        <div class="dialog-body">
+                            <p>Are you sure?</p>
+                            <button type="button" class="btn-solid theme-secondary" data-bs-dismiss="dialog">No</button>
+                            <button type="button" class="btn-solid theme-danger" onclick="deleteStudent(${i})">Yes</button>
+                        </div>
+                    </dialog>
+
+                    <dialog class="dialog w-25" id="edit_${i}">
+                        <button type="button" class="btn-close ms-auto mt-2 me-4" data-bs-dismiss="dialog" aria-label="Close"></button>
+                        <div class="dialog-body">
+                            <input type="text" placeholder="Student Name" id="edit_student_${i}" class="form-control mb-2" value="${students[i]}">
+                            <button type="button" class="btn-solid theme-primary" data-bs-dismiss="dialog" onclick="editStudent(${i})">Save</button>
+                        </div>
+                    </dialog>
+                    `
             }
         }
 
@@ -103,10 +130,10 @@
         // students.pop()
         // students.reverse()
         // let sub = students.slice(0, -1)
-        students.splice(1, 1, "WIC")
+        // students.splice(1, 1, "WIC")
         // console.log(sub);    
 
-        console.log(students);
+        // console.log(students);
 
         function get5() {
             return 5;
