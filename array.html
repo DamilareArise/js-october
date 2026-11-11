@@ -31,6 +31,19 @@
         <ol id="displayScreen" class="">
 
         </ol>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">Course</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="studDisplay">
+                
+            </tbody>
+        </table>
 
     </section>
 
@@ -40,14 +53,54 @@
         crossorigin="anonymous"></script>
 
     <script>
+
+
+     let all_stud = [
+        {name: "ade", course: "DSE"},       
+        {name: "adewale", course: "DSA"},       
+        {name: "ayuba", course: "DSG"},       
+
+     ]
+    studDisplay.innerHTML = ""
+     for (let i = 0; i < all_stud.length; i++) {
+        
+        studDisplay.innerHTML += `
+            <tr>
+                <th scope="row">${i + 1}</th>
+                <td>${all_stud[i].name}</td>
+                <td>${all_stud[i].course}</td>
+                <td>
+                    <span class="ms-auto" type="button" data-bs-toggle="menu" aria-expanded="false">
+                        <i class="bi bi-three-dots"></i>
+                    </span>
+                </td>
+            </tr>
+        
+        `
+        
+     }
+
+
+
         // array
         let x = "Hello" // ["H", "e", "l", "l", "o"]
 
 
         // CRUD - Create, Read, Update, Delete
 
-        let students = []
+        let students;
 
+        // localStorage.setItem("students", JSON.stringify(students))
+        // let res = JSON.parse(localStorage.getItem("students"))
+
+        // localStorage.students = JSON.stringify(students)
+        // localStorage.data = "qwerty"
+
+        // let res = JSON.parse(localStorage.students)
+        // console.log(res);
+
+        // localStorage.clear()
+        // localStorage.removeItem("students")
 
         // students.push("Juwon")
         // console.log(students);
@@ -70,6 +123,10 @@
                 }
 
                 students.push(info)
+                localStorage.students = JSON.stringify(students)
+
+                studentName.value = ""
+                studentCourse.value = ""
                 showStudents()
                 alertScreen.innerHTML = ""
 
@@ -78,19 +135,30 @@
 
         function deleteStudent(i) {
             students.splice(i, 1)
+            localStorage.students = JSON.stringify(students)
+
             showStudents()
         }
 
         function editStudent(i) {
-            let newname = document.getElementById(`edit_student_${i}`).value
+            let newname = document.getElementById(`edit_student_name_${i}`).value
+            let newcourse = document.getElementById(`edit_student_course_${i}`).value
 
-            students.splice(i, 1, newname)
+            // students.splice(i, 1, newname)
+            students[i].student_name = newname
+            students[i].student_course = newcourse
+
+            localStorage.students = JSON.stringify(students)
+
             showStudents()
         }
 
         function showStudents() {
-            console.log(students);
-            
+            // console.log(students);
+
+            students = localStorage.students ? JSON.parse(localStorage.students): []
+
+
             displayScreen.innerHTML = ''
             for (let i = 0; i < students.length; i++) {
                 displayScreen.innerHTML += `
@@ -100,8 +168,8 @@
                             <i class="bi bi-three-dots"></i>
                         </span>
                         <div class="menu">
-                            <a class="menu-item" href="#"  data-bs-toggle="dialog" data-bs-target="#delete_${i}">Delete ${students[i]}</a>
-                            <a class="menu-item" href="#" data-bs-toggle="dialog" data-bs-target="#edit_${i}">Edit ${students[i]}</a>
+                            <a class="menu-item" href="#"  data-bs-toggle="dialog" data-bs-target="#delete_${i}">Delete ${students[i].student_name}</a>
+                            <a class="menu-item" href="#" data-bs-toggle="dialog" data-bs-target="#edit_${i}">Edit ${students[i].student_name}</a>
                         </div>
                     </li>
                     
@@ -116,7 +184,8 @@
                     <dialog class="dialog w-25" id="edit_${i}">
                         <button type="button" class="btn-close ms-auto mt-2 me-4" data-bs-dismiss="dialog" aria-label="Close"></button>
                         <div class="dialog-body">
-                            <input type="text" placeholder="Student Name" id="edit_student_${i}" class="form-control mb-2" value="${students[i]}">
+                            <input type="text" placeholder="Student Name" id="edit_student_name_${i}" class="form-control mb-2" value="${students[i].student_name}">
+                            <input type="text" placeholder="Student Course" id="edit_student_course_${i}" class="form-control mb-2" value="${students[i].student_course}">
                             <button type="button" class="btn-solid theme-primary" data-bs-dismiss="dialog" onclick="editStudent(${i})">Save</button>
                         </div>
                     </dialog>
