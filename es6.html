@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="showCars()">
+
+    <!-- <button onclick="add(2, 4)">click</button> -->
+    <input type="text" placeholder="Search" id="searchInput" onkeyup="searchCar()">
+    <button onclick="searchCar()">search</button>
+    <ul id="myScreen">
+
+    </ul>
+
+    <script>
+
+        // function add(){
+
+        // }
+
+
+
+        const add = () => {
+
+
+        }
+
+
+        let cars = ["Toyota", "Benz", "Lexus"]
+
+        // for(i=0; i<cars.length; i++){
+        //     console.log(cars[i]);
+
+        // }
+        // const a = (value, index, arr)=>{
+        //     console.log(value, index, arr);
+
+        // }
+
+
+        // cars.forEach((value) => {
+        //     console.log(value);
+        // })
+
+        // let res = cars.filter((value) => {
+        //     return value.includes("e")
+        // })
+
+        // console.log(res);
+
+        // car = "Benx"
+        // console.log(car.includes("B"))
+
+
+
+        const showCars = () => {
+            myScreen.innerHTML = ""
+            cars.forEach((value) => {
+                myScreen.innerHTML += `<li>${value}</li>`
+            })
+        }
+
+        const searchCar = () => {
+            if (searchInput.value){
+                let res = cars.filter((value) => {
+                    return value.toLowerCase().includes(searchInput.value.toLowerCase())
+                })
+                
+                myScreen.innerHTML = ""
+                res.forEach((value) => {
+                    myScreen.innerHTML += `<li>${value}</li>`
+                })
+                
+            }else{
+                showCars()
+            }
+        }
+
+
+        
+
+    </script>
+</body>
+
+</html>
